@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Roulette Wheel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="{{url_for('static', filename='templates/dashboard.html') }}"
+        >Dashboard</a
+      >
+      <a href="{{url_for('static', filename='templates/about.html') }}"
+        >About</a
+      >
+      <a href="{{url_for('static', filename='templates/wheel.html') }}"
+        >Wheel</a
+      >
+      <a href="/tokens">{{ tokens }} Tokens</a>
+    </nav>
+    <div class="wheel">
+      <img
+        src="{{ url_for('static', filename='images/wheel.png') }}"
+        alt="Roulette Wheel"
+      />
+    </div>
+  </body>
+</html>

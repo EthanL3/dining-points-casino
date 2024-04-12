@@ -1,0 +1,49 @@
+<!-- templates/survey.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ survey.title }}</title>
+  </head>
+  <body>
+    <h1>{{ survey.title }}</h1>
+    <p>{{ survey.description }}</p>
+    <h2>Questions:</h2>
+    <form action="/submit_survey/{{ survey.id }}" method="POST">
+      {% set question_index = 0 %} {% for question in survey.questions %}
+      <div>
+        <label for="question{{ question_index }}">{{ question.question }}</label
+        ><br />
+        {% if question.type == 'text' %}
+        <input
+          type="text"
+          id="question{{ question_index }}"
+          name="question{{ question_index }}"
+        /><br /><br />
+        {% elif question.type == 'number' %}
+        <input
+          type="number"
+          id="question{{ question_index }}"
+          name="question{{ question_index }}"
+        /><br /><br />
+        {% elif question.type == 'radio' %} {% set option_index = 0 %} {% for
+        option in question.options %}
+        <input
+          type="radio"
+          id="question{{ question_index }}_option{{ option_index }}"
+          name="question{{ question_index }}"
+          value="{{ option }}"
+        />
+        <label for="question{{ question_index }}_option{{ option_index }}"
+          >{{ option }}</label
+        ><br />
+        {% set option_index = option_index + 1 %} {% endfor %}
+        <br />
+        {% endif %} {% set question_index = question_index + 1 %}
+      </div>
+      {% endfor %}
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
